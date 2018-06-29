@@ -7,37 +7,43 @@ const units = [
     'PB',
     'EB',
     'ZB',
-    'YB'
+    'YB',
 ];
 
 const defaults = {
     delimiters: {
         thousands: ',',
-        decimal: '.'
+        decimal: '.',
     },
+    output: 'string',
     format: '{{size}} {{unit}}',
-    output: 'string'
 };
 
 const readableFilesize = (value, options) => {
     const {
-        delimiters = defaults.delimiters,
+        delimiters = false,
         format = defaults.format,
-        output = defaults.output
+        output = defaults.output,
     } = { ...options };
 
     if (!Number.isInteger(value)) {
         throw new TypeError(`"value" must be an integer: ${value}`);
     }
 
+    if (value > Number.MAX_SAFE_INTEGER) {
+        // The largest exact integral value is 2^53 - 1, or 9007199254740991.
+        // In ES6, this is defined as Number.MAX_SAFE_INTEGER. 
+        throw new Error(`"value" exceeds the integer range (${Number.MAX_SAFE_INTEGER}): ${value}`);
+    }
+
     if (value < 0) {
         throw new TypeError(`"value" is invalid: ${value}`);
     }
 
-    let size = String(0);
+    let size = String(value);
     let unit = units[0];
 
-    if (value > 0) {
+    if (value >= 1024) {
         let u = Math.floor(Math.log(value) / Math.log(1024));
         if (u >= units.length) {
             u = units.length - 1;
@@ -60,28 +66,35 @@ const readableFilesize = (value, options) => {
         unit = units[u];
     }
 
-    if (typeof delimiters === 'object') {
-        const parts = size.split('.');
+    if (typeof delimiters === 'object' || delimiters === true) {
+        const {
+            thousands = defaults.delimiters.thousands,
+            decimal = defaults.delimiters.decimal,
+        } = { ...delimiters };
 
-        if (delimiters.thousands && parts[0] && parts[0].length > 3) {
-            parts[0] = parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, delimiters.thousands);
+        const parts = size.split(defaults.delimiters.decimal);
+
+        if (thousands && parts[0] && parts[0].length > 3) {
+            parts[0] = parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, thousands);
         }
-        if (delimiters.decimal) {
-            size = parts.join(delimiters.decimal);
+        if (decimal) {
+            size = parts.join(decimal);
         } else {
-            size = parts.join('.');
+            size = parts.join(defaults.delimiters.decimal);
         }
     }
 
     if (output === 'array') {
         return [size, unit];
-    } else if (output === 'object') {
-        return { size, unit };
-    } else {
-        return String(format)
-            .replace('{{size}}', size)
-            .replace('{{unit}}', unit);
     }
+    
+    if (output === 'object') {
+        return { size, unit };
+    }
+    
+    return (typeof format === 'function')
+        ? format({ size, unit })
+        : String(format).replace('{{size}}', size).replace('{{unit}}', unit);
 };
 
 export default readableFilesize;
