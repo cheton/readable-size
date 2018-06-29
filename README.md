@@ -1,46 +1,46 @@
-# readable-filesize [![build status](https://travis-ci.org/cheton/readable-filesize.svg?branch=master)](https://travis-ci.org/cheton/readable-filesize) [![Coverage Status](https://coveralls.io/repos/github/cheton/readable-filesize/badge.svg?branch=master)](https://coveralls.io/github/cheton/readable-filesize?branch=master)
-[![NPM](https://nodei.co/npm/readable-filesize.png?downloads=true&stars=true)](https://www.npmjs.com/package/readable-filesize)
+# readable-size [![build status](https://travis-ci.org/cheton/readable-size.svg?branch=master)](https://travis-ci.org/cheton/readable-size) [![Coverage Status](https://coveralls.io/repos/github/cheton/readable-size/badge.svg?branch=master)](https://coveralls.io/github/cheton/readable-size?branch=master)
+[![NPM](https://nodei.co/npm/readable-size.png?downloads=true&stars=true)](https://www.npmjs.com/package/readable-size)
 
 Converts bytes into human readable size units: B, KB, MB, GB, TB, PB, EB, ZB, YB.
 
 ## Installation
 
 ```bash
-npm install --save readable-filesize
+npm install --save readable-size
 ```
 
 ## Examples
 
 ```js
-readableFilesize(1); // '1 B'
-readableFilesize(1023); // '1023 B'
-readableFilesize(1024); // '1.00 KB'
-readableFilesize(1025); // '1.00 KB'
-readableFilesize(1000000); // '976 KB'
-readableFilesize(1023999); // '999 KB'
-readableFilesize(1024000); // '0.97 MB'
-readableFilesize(1048575); // '0.99 MB'
-readableFilesize(1048576); // '1.00 MB'
-readableFilesize(1048577); // '1.00 MB'
-readableFilesize(1000000000); // '953 MB'
-readableFilesize(1048575999); // '999 MB'
-readableFilesize(1048576000); // '0.97 GB'
-readableFilesize(1073741823); // '0.99 GB'
-readableFilesize(1073741824); // '1.00 TB'
+readableSize(1); // '1 B'
+readableSize(1023); // '1023 B'
+readableSize(1024); // '1.00 KB'
+readableSize(1025); // '1.00 KB'
+readableSize(1000000); // '976 KB'
+readableSize(1023999); // '999 KB'
+readableSize(1024000); // '0.97 MB'
+readableSize(1048575); // '0.99 MB'
+readableSize(1048576); // '1.00 MB'
+readableSize(1048577); // '1.00 MB'
+readableSize(1000000000); // '953 MB'
+readableSize(1048575999); // '999 MB'
+readableSize(1048576000); // '0.97 GB'
+readableSize(1073741823); // '0.99 GB'
+readableSize(1073741824); // '1.00 TB'
 ```
 
 ### Formatted Output
 
 ```js
-readableFilesize(999, { // '999 bytes'
+readableSize(999, { // '999 bytes'
     format: ({ size, unit }) => {
         unit = { B: 'bytes' }[unit] || unit;
         return `${size} ${unit}`;
     }
 });
-readableFilesize(1024, { output: 'string' }); // '1.00 KB'
-readableFilesize(1024, { output: 'array' }); // [ '1.00', 'KB' ]
-readableFilesize(1024, { output: 'object' }); // { size: '1.00', unit: 'KB' }
+readableSize(1024, { output: 'string' }); // '1.00 KB'
+readableSize(1024, { output: 'array' }); // [ '1.00', 'KB' ]
+readableSize(1024, { output: 'object' }); // { size: '1.00', unit: 'KB' }
 ```
 
 ### Separators
@@ -54,9 +54,9 @@ const options = {
         decimal: '.',
     }
 };
-readableFilesize(999, options); // '999 B'
-readableFilesize(1000, options); // '1,000 B'
-readableFilesize(1024, options); // '1.00 KB'
+readableSize(999, options); // '999 B'
+readableSize(1000, options); // '1,000 B'
+readableSize(1024, options); // '1.00 KB'
 ```
 
 #### French
@@ -68,9 +68,9 @@ const options = {
         decimal: ',',
     }
 };
-readableFilesize(999, options); // '999 B'
-readableFilesize(1000, options); // '1 000 B'
-readableFilesize(1024, options); // '1,00 KB'
+readableSize(999, options); // '999 B'
+readableSize(1000, options); // '1 000 B'
+readableSize(1024, options); // '1,00 KB'
 ```
 
 #### Dutch
@@ -82,9 +82,9 @@ const options = {
         decimal: ',',
     }
 };
-readableFilesize(999, options); // '999 B'
-readableFilesize(1000, options); // '1.000 B'
-readableFilesize(1024, options); // '1,00 KB'
+readableSize(999, options); // '999 B'
+readableSize(1000, options); // '1.000 B'
+readableSize(1024, options); // '1,00 KB'
 ```
 
 ## Options

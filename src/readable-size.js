@@ -19,7 +19,7 @@ const defaults = {
     format: '{{size}} {{unit}}',
 };
 
-const readableFilesize = (value, options) => {
+const readableSize = (value, options) => {
     const {
         separator = false,
         format = defaults.format,
@@ -32,7 +32,7 @@ const readableFilesize = (value, options) => {
 
     if (value > Number.MAX_SAFE_INTEGER) {
         // The largest exact integral value is 2^53 - 1, or 9007199254740991.
-        // In ES6, this is defined as Number.MAX_SAFE_INTEGER. 
+        // In ES6, this is defined as Number.MAX_SAFE_INTEGER.
         throw new Error(`"value" exceeds the integer range (${Number.MAX_SAFE_INTEGER}): ${value}`);
     }
 
@@ -87,14 +87,14 @@ const readableFilesize = (value, options) => {
     if (output === 'array') {
         return [size, unit];
     }
-    
+
     if (output === 'object') {
         return { size, unit };
     }
-    
+
     return (typeof format === 'function')
         ? format({ size, unit })
         : String(format).replace('{{size}}', size).replace('{{unit}}', unit);
 };
 
-export default readableFilesize;
+export default readableSize;

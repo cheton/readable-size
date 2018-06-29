@@ -1,3 +1,3 @@
-import readableFilesize from './readable-filesize';
+import readableSize from './readable-size';
 
-module.exports = readableFilesize;
+module.exports = readableSize;

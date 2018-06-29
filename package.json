@@ -1,8 +1,8 @@
 {
-  "name": "readable-filesize",
+  "name": "readable-size",
   "version": "0.1.0",
   "description": "Converts bytes into human readable size units.",
-  "homepage": "https://github.com/cheton/readable-filesize",
+  "homepage": "https://github.com/cheton/readable-size",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "npm run eslint && npm test && npm run build",
@@ -15,14 +15,16 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cheton/readable-filesize.git"
+    "url": "git+https://github.com/cheton/readable-size.git"
   },
   "keywords": [
     "bytes",
+    "human",
     "readable",
+    "filesize",
     "file",
     "size",
-    "filesize"
+    "units"
   ],
   "dependencies": {
   },
