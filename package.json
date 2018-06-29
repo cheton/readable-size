@@ -1,7 +1,7 @@
 {
   "name": "readable-filesize",
   "version": "0.1.0",
-  "description": "Converts bytes into human readable file size.",
+  "description": "Converts bytes into human readable size units.",
   "homepage": "https://github.com/cheton/readable-filesize",
   "main": "lib/index.js",
   "scripts": {
