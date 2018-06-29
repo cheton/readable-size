@@ -42,9 +42,9 @@ test('exceptions', (t) => {
     t.end();
 });
 
-test('delimiters', (t) => {
-    t.test('no delimiters', (t) => {
-        const options = { delimiters: false };
+test('separator', (t) => {
+    t.test('no separators', (t) => {
+        const options = { separator: false };
         t.equal(readableFilesize(999, options), '999 B');
         t.equal(readableFilesize(1000, options), '1000 B');
         t.equal(readableFilesize(1024, options), '1.00 KB');
@@ -52,8 +52,8 @@ test('delimiters', (t) => {
         t.end();
     });
 
-    t.test('default delimiters', (t) => {
-        const options = { delimiters: true };
+    t.test('default separators', (t) => {
+        const options = { separator: true };
         t.equal(readableFilesize(999, options), '999 B');
         t.equal(readableFilesize(1000, options), '1,000 B');
         t.equal(readableFilesize(1024, options), '1.00 KB');
@@ -61,8 +61,8 @@ test('delimiters', (t) => {
         t.end();
     });
 
-    t.test('default delimiters', (t) => {
-        const options = { delimiters: { } };
+    t.test('default separators', (t) => {
+        const options = { separator: { } };
         t.equal(readableFilesize(999, options), '999 B');
         t.equal(readableFilesize(1000, options), '1,000 B');
         t.equal(readableFilesize(1024, options), '1.00 KB');
@@ -71,9 +71,9 @@ test('delimiters', (t) => {
     });
 
     // English
-    t.test('English delimiters', (t) => {
+    t.test('English separators', (t) => {
         const options = {
-            delimiters: {
+            separator: {
                 thousands: ',',
                 decimal: '.',
             }
@@ -86,9 +86,9 @@ test('delimiters', (t) => {
     });
 
     // French
-    t.test('French delimiters', (t) => {
+    t.test('French separators', (t) => {
         const options = {
-            delimiters: {
+            separator: {
                 thousands: ' ',
                 decimal: ',',
             }
@@ -101,9 +101,9 @@ test('delimiters', (t) => {
     });
 
     // Dutch
-    t.test('Dutch delimiters', (t) => {
+    t.test('Dutch separators', (t) => {
         const options = {
-            delimiters: {
+            separator: {
                 thousands: '.',
                 decimal: ',',
             }

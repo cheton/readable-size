@@ -11,7 +11,7 @@ const units = [
 ];
 
 const defaults = {
-    delimiters: {
+    separator: {
         thousands: ',',
         decimal: '.',
     },
@@ -21,7 +21,7 @@ const defaults = {
 
 const readableFilesize = (value, options) => {
     const {
-        delimiters = false,
+        separator = false,
         format = defaults.format,
         output = defaults.output,
     } = { ...options };
@@ -66,13 +66,13 @@ const readableFilesize = (value, options) => {
         unit = units[u];
     }
 
-    if (typeof delimiters === 'object' || delimiters === true) {
+    if (typeof separator === 'object' || separator === true) {
         const {
-            thousands = defaults.delimiters.thousands,
-            decimal = defaults.delimiters.decimal,
-        } = { ...delimiters };
+            thousands = defaults.separator.thousands,
+            decimal = defaults.separator.decimal,
+        } = { ...separator };
 
-        const parts = size.split(defaults.delimiters.decimal);
+        const parts = size.split(defaults.separator.decimal);
 
         if (thousands && parts[0] && parts[0].length > 3) {
             parts[0] = parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, thousands);
@@ -80,7 +80,7 @@ const readableFilesize = (value, options) => {
         if (decimal) {
             size = parts.join(decimal);
         } else {
-            size = parts.join(defaults.delimiters.decimal);
+            size = parts.join(defaults.separator.decimal);
         }
     }
 
