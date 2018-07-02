@@ -1,6 +1,6 @@
 {
   "name": "readable-size",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Converts bytes into human readable size units.",
   "homepage": "https://github.com/cheton/readable-size",
   "main": "lib/index.js",
