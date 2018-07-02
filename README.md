@@ -33,18 +33,24 @@ readableSize(1073741824); // '1.00 TB'
 
 The output is one of `'string'`, `'array'`, `'object'`, or function type.
 
-#### string
+#### 'string'
 
+```js
 readableSize(1024, { output: 'string' }); // '1.00 KB'
 readableSize(1024, { output: 'string', format: '{{size}} ({{unit}})' }); // '1.00 (KB)'
+```
 
-#### array
+#### 'array'
 
+```js
 readableSize(1024, { output: 'array' }); // [ '1.00', 'KB' ]
+```
 
-#### object
+#### 'object'
 
+```js
 readableSize(1024, { output: 'object' }); // { size: '1.00', unit: 'KB' }
+```
 
 #### function
 
@@ -124,7 +130,7 @@ _*('array')*_ The output is `[size, unit]`
 
 _*('object')*_ The output is `{ size, unit }`
 
-_*(function)*_
+_*(function)*_ A user-defined output function:
 
 ```js
 format: ({ size, unit }) => {
