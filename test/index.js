@@ -231,9 +231,9 @@ test('output format', (t) => {
         t.end();
     });
 
-    t.test('format function', (t) => {
+    t.test('output function', (t) => {
         const options = {
-            format: function({ size, unit }) {
+            output: function({ size, unit }) {
                 unit = {
                     'B': 'bytes',
                 }[unit] || unit;

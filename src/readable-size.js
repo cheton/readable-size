@@ -84,6 +84,10 @@ const readableSize = (value, options) => {
         }
     }
 
+    if (typeof output === 'function') {
+        return output({ size, unit });
+    }
+
     if (output === 'array') {
         return [size, unit];
     }
@@ -92,9 +96,7 @@ const readableSize = (value, options) => {
         return { size, unit };
     }
 
-    return (typeof format === 'function')
-        ? format({ size, unit })
-        : String(format).replace('{{size}}', size).replace('{{unit}}', unit);
+    return String(format).replace('{{size}}', size).replace('{{unit}}', unit);
 };
 
 export default readableSize;

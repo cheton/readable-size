@@ -29,18 +29,32 @@ readableSize(1073741823); // '0.99 GB'
 readableSize(1073741824); // '1.00 TB'
 ```
 
-### Formatted Output
+### Output
+
+The output is one of `'string'`, `'array'`, `'object'`, or function type.
+
+#### string
+
+readableSize(1024, { output: 'string' }); // '1.00 KB'
+readableSize(1024, { output: 'string', format: '{{size}} ({{unit}})' }); // '1.00 (KB)'
+
+#### array
+
+readableSize(1024, { output: 'array' }); // [ '1.00', 'KB' ]
+
+#### object
+
+readableSize(1024, { output: 'object' }); // { size: '1.00', unit: 'KB' }
+
+#### function
 
 ```js
 readableSize(999, { // '999 bytes'
-    format: ({ size, unit }) => {
+    output: ({ size, unit }) => {
         unit = { B: 'bytes' }[unit] || unit;
         return `${size} ${unit}`;
     }
 });
-readableSize(1024, { output: 'string' }); // '1.00 KB'
-readableSize(1024, { output: 'array' }); // [ '1.00', 'KB' ]
-readableSize(1024, { output: 'object' }); // { size: '1.00', unit: 'KB' }
 ```
 
 ### Separators
@@ -104,13 +118,13 @@ separator: {
 
 ### output
 
-_*(string)*_ One of `'array'`, `'object'`, or `'string'`, default is `'string'`
+_*('string')*_ The output is defined by the format string, default is `'{{size}} {{unit}}'`
 
-### format
+_*('array')*_ The output is `[size, unit]`
 
-_*(string)*_ The format string, default is `'{{size}} {{unit}}'`
+_*('object')*_ The output is `{ size, unit }`
 
-_*(function)*_ The format function:
+_*(function)*_
 
 ```js
 format: ({ size, unit }) => {
@@ -118,6 +132,10 @@ format: ({ size, unit }) => {
     return `${size} ${unit}`;
 }
 ```
+
+### format
+
+_*(string)*_ The format string, default is `'{{size}} {{unit}}'`
 
 ## License
 
